@@ -1,4 +1,4 @@
-// Materias obligatorias y opcionales para Administración Pública
+// Materias obligatorias y opcionales para Tecnicatura en administración
 const materiasData = [
   // [semestre, materia, créditos, área, requisitos, tipo]
   // OBLIGATORIAS
