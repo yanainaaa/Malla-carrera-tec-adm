@@ -1,0 +1,173 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #ffe6f2;
+  color: #333;
+  margin: 0; padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #e75480;
+}
+
+#malla-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+}
+
+.fila-semestres {
+  display: flex;
+  overflow-x: auto;
+  padding: 12px 0;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.semestre-col {
+  min-width: 220px;
+  background: #fff0fa;
+  border: 2px solid #e75480;
+  border-radius: 12px;
+  padding: 12px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-shadow: 0 2px 8px #e7548020;
+}
+
+.semestre-title {
+  text-align: center;
+  font-weight: bold;
+  color: #e75480;
+  margin-bottom: 6px;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+}
+
+.subtitulo-materia {
+  font-weight: bold;
+  color: #e75480;
+  margin: 10px 0 4px 0;
+  font-size: 0.98em;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+.sin-materias {
+  color: #b8a2b8;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.materia {
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 7px;
+  border-left: 6px solid #e75480;
+  transition: background 0.2s, opacity 0.2s;
+  box-shadow: 0 1px 5px #e7548035;
+  cursor: pointer;
+  opacity: 1;
+  position: relative;
+  font-size: 0.97em;
+}
+
+.materia .area {
+  font-size: 0.9em;
+  color: #b2466d;
+  display: block;
+}
+
+.materia .creditos {
+  font-size: 0.8em;
+  color: #888;
+  float: right;
+}
+
+.materia .requisitos {
+  font-size: 0.8em;
+  color: #a77c9a;
+  margin-top: 3px;
+}
+
+.materia.tachada {
+  background: #ffd1ea;
+  text-decoration: line-through;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.materia.bloqueada {
+  background: #ffe6f2;
+  border-left: 6px solid #f5b1c9;
+  color: #999;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.materia.opcional {
+  border-left: 6px solid #ffd700;
+  background: #fff8e7;
+}
+
+#reset-progress {
+  display: block;
+  margin: 25px auto 10px auto;
+  background: #e75480;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#reset-progress:hover { background: #d13a6f; }
+
+footer {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 0.96em;
+}
+
+#contador-creditos {
+  position: fixed;
+  top: 70px;
+  right: 0;
+  width: 280px;
+  background: #fff6fb;
+  border-left: 3px solid #e75480;
+  border-radius: 16px 0 0 16px;
+  box-shadow: -2px 2px 8px #e7548020;
+  padding: 16px 18px 18px 18px;
+  z-index: 10000;
+  font-size: 1em;
+  color: #a5426c;
+  max-height: 80vh;
+  overflow-y: auto;
+  min-height: 250px;
+}
+#contador-creditos h2 {
+  margin-top: 0; color: #e75480; font-size: 1.15em; text-align: left;
+  margin-bottom: 8px;
+}
+#contador-creditos .total-creditos {
+  font-size: 1.08em; margin-bottom: 12px;
+}
+#contador-creditos ul.areas-creditos {
+  list-style: none; margin: 0; padding: 0;
+}
+#contador-creditos ul.areas-creditos li {
+  margin-bottom: 7px; display: flex; align-items: center; gap: 6px;
+}
+#contador-creditos .falta { color: #d85b8f; font-weight: bold; font-size: 0.93em;}
+#contador-creditos .ok { color: #3bbc7c; font-weight: bold; }
+#contador-creditos .area-nombre { flex: 1 1 auto; }
+#contador-creditos .area-valor { font-family: monospace; margin-right: 2px; }
+@media (max-width: 800px) {
+  #contador-creditos { position: static; width: 100%; max-width: 95vw; border-radius: 0 0 14px 14px; border-left: none; border-top: 3px solid #e75480; }
+  }
