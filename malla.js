@@ -68,6 +68,26 @@ function calcularCreditosTotal(materiasTachadas) {
 // Estado: materias tachadas
 let materiasTachadas = JSON.parse(localStorage.getItem("materiasTachadas") || "{}");
 
+// Helper para doble toque en móvil
+function addDoubleTapListener(element, singleTapFn, doubleTapFn) {
+  let lastTap = 0;
+  element.addEventListener("touchend", function(e) {
+    let currentTime = new Date().getTime();
+    let tapLength = currentTime - lastTap;
+    if (tapLength < 400 && tapLength > 0) {
+      doubleTapFn(e);
+      e.preventDefault();
+    } else {
+      setTimeout(() => {
+        if (!element._doubleTapHandled) singleTapFn(e);
+        element._doubleTapHandled = false;
+      }, 350);
+    }
+    lastTap = currentTime;
+    element._doubleTapHandled = true;
+  });
+}
+
 // Construye la UI
 function renderMalla() {
   const cont = document.getElementById("malla-container");
@@ -116,11 +136,38 @@ function renderMalla() {
             <div class="requisitos">${requisitos.length > 0 ? "Requisitos: " + requisitos.join(", ") : ""}</div>
           `;
           if (!div.classList.contains("bloqueada")) {
-            div.addEventListener("click", () => {
-              materiasTachadas[materia] = !materiasTachadas[materia];
-              localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
-              renderMalla();
+            // Click y doble click escritorio
+            div.addEventListener("click", (e) => {
+              if (!materiasTachadas[materia]) {
+                materiasTachadas[materia] = true;
+                localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                renderMalla();
+              }
             });
+            div.addEventListener("dblclick", (e) => {
+              if (materiasTachadas[materia]) {
+                materiasTachadas[materia] = false;
+                localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                renderMalla();
+              }
+            });
+            // Doble toque móvil
+            addDoubleTapListener(div,
+              () => {
+                if (!materiasTachadas[materia]) {
+                  materiasTachadas[materia] = true;
+                  localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                  renderMalla();
+                }
+              },
+              () => {
+                if (materiasTachadas[materia]) {
+                  materiasTachadas[materia] = false;
+                  localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                  renderMalla();
+                }
+              }
+            );
           }
           col.appendChild(div);
         });
@@ -152,11 +199,36 @@ function renderMalla() {
             <div class="requisitos">${requisitos.length > 0 ? "Requisitos: " + requisitos.join(", ") : ""}</div>
           `;
           if (!div.classList.contains("bloqueada")) {
-            div.addEventListener("click", () => {
-              materiasTachadas[materia] = !materiasTachadas[materia];
-              localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
-              renderMalla();
+            div.addEventListener("click", (e) => {
+              if (!materiasTachadas[materia]) {
+                materiasTachadas[materia] = true;
+                localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                renderMalla();
+              }
             });
+            div.addEventListener("dblclick", (e) => {
+              if (materiasTachadas[materia]) {
+                materiasTachadas[materia] = false;
+                localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                renderMalla();
+              }
+            });
+            addDoubleTapListener(div,
+              () => {
+                if (!materiasTachadas[materia]) {
+                  materiasTachadas[materia] = true;
+                  localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                  renderMalla();
+                }
+              },
+              () => {
+                if (materiasTachadas[materia]) {
+                  materiasTachadas[materia] = false;
+                  localStorage.setItem("materiasTachadas", JSON.stringify(materiasTachadas));
+                  renderMalla();
+                }
+              }
+            );
           }
           col.appendChild(div);
         });
