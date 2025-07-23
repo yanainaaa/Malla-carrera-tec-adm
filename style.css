@@ -171,3 +171,12 @@ footer {
 @media (max-width: 800px) {
   #contador-creditos { position: static; width: 100%; max-width: 95vw; border-radius: 0 0 14px 14px; border-left: none; border-top: 3px solid #e75480; }
   }
+.materia {
+  touch-action: manipulation;
+  min-height: 46px; /* área táctil más grande en móviles */
+}
+
+.materia:active {
+  box-shadow: 0 0 6px #e75480;
+  background: #ffe6f2;
+}
